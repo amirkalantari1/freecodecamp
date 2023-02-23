@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Quote Machine</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container-fluid d-flex justify-content-center align-items-center" id="quote-box">
+    <div class="col-6">
+      <div id="text"></div>
+      <div id="author"></div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary" id="new-quote">New Quote</button>
+        <a href="#" class="btn btn-secondary" id="tweet-quote" target="_blank">Tweet Quote</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include jQuery and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Define an array of quotes and authors
+      var quotes = [
+        {
+          quote: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+          author: "Nelson Mandela"
+        },
+        {
+          quote: "The way to get started is to quit talking and begin doing.",
+          author: "Walt Disney"
+        },
+        {
+          quote: "If life were predictable it would cease to be life, and be without flavor.",
+          author: "Eleanor Roosevelt"
+        },
+        {
+          quote: "If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough.",
+          author: "Oprah Winfrey"
+        },
+        {
+          quote: "If you set your goals ridiculously high and it's a failure, you will fail above everyone else's success.",
+          author: "James Cameron"
+        }
+      ];
+
+      // Define a function to get a random quote
+      function getRandomQuote() {
+        return quotes[Math.floor(Math.random() * quotes.length)];
+      }
+
+      // Define a function to render a quote
+      function renderQuote() {
+        var quote = getRandomQuote();
+        $('#text').text(quote.quote);
+        $('#author').text('- ' + quote.author);
+        $('#tweet-quote').attr('href', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent('"' + quote.quote + '" - ' + quote.author));
+      }
+
+      // Render the initial quote
+      renderQuote();
+
+      // Add a click event listener to the "New Quote" button
+      $('#new-quote').on('click', function() {
+        renderQuote();
+      });
+    });
+  </script>
+</body>
+</html>
