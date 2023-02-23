@@ -1,0 +1,62 @@
+import React, { useState } from 'react';
+import marked from 'marked';
+
+const defaultMarkdown = `# Heading 1
+
+## Heading 2
+
+[Link](https://www.freecodecamp.org)
+
+\`inline code\`
+
+\`\`\`
+// code block
+function hello() {
+  console.log("Hello, world!");
+}
+\`\`\`
+
+- List item 1
+- List item 2
+- List item 3
+
+> Blockquote
+
+![Image](https://via.placeholder.com/150x150)
+
+**Bold text**
+`;
+
+const App = () => {
+  const [markdown, setMarkdown] = useState(defaultMarkdown);
+
+  const handleEditorChange = (event) => {
+    setMarkdown(event.target.value);
+  };
+
+  return (
+    <div className="container">
+      <div className="row mt-3">
+        <div className="col-md-6">
+          <h2 className="text-center mb-3">Editor</h2>
+          <textarea
+            className="form-control"
+            id="editor"
+            value={markdown}
+            onChange={handleEditorChange}
+          />
+        </div>
+        <div className="col-md-6">
+          <h2 className="text-center mb-3">Previewer</h2>
+          <div
+            className="preview"
+            id="preview"
+            dangerouslySetInnerHTML={{ __html: marked(markdown) }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
